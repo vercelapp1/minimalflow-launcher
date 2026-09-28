@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    MinimalFlow brand mark.
+
+    Three rounded bars of different heights rising from a shared baseline: the
+    vertical, scannable rhythm the launcher is built around. Drawn inside the
+    adaptive-icon safe zone (radius 33 of the 108x108 canvas) so no launcher mask
+    clips it.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Left bar: short, slightly recessed. -->
+    <path
+        android:fillAlpha="0.62"
+        android:fillColor="#B8D9FF"
+        android:pathData="M38,45 H43 A5,5 0 0 1 43,50 V65 A5,5 0 0 1 38,70 H33 A5,5 0 0 1 33,65 V50 A5,5 0 0 1 38,45 Z" />
+
+    <!-- Centre bar: the tallest, the visual anchor. -->
+    <path
+        android:fillColor="#B8D9FF"
+        android:pathData="M54,32 H59 A5,5 0 0 1 59,37 V65 A5,5 0 0 1 54,70 H49 A5,5 0 0 1 49,65 V37 A5,5 0 0 1 54,32 Z" />
+
+    <!-- Right bar: medium, balances the composition. -->
+    <path
+        android:fillAlpha="0.62"
+        android:fillColor="#B8D9FF"
+        android:pathData="M70,39 H75 A5,5 0 0 1 75,44 V65 A5,5 0 0 1 70,70 H65 A5,5 0 0 1 65,65 V44 A5,5 0 0 1 70,39 Z" />
+</vector>

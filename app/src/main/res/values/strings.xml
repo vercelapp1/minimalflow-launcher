@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application label. -->
+    <string name="app_name">MinimalFlow</string>
+    <string name="app_name_long">MinimalFlow Launcher</string>
+
+    <!-- Shown by the system when it asks a widget provider to configure itself. -->
+    <string name="widget_configure_title">Add widget</string>
+    <string name="widget_configure_save">Add widget</string>
+    <string name="widget_configure_cancel">Cancel</string>
+    <string name="widget_configure_message">This widget is not finished yet. Tap “Add widget” to place it with the default size, or cancel to go back.</string>
+
+    <!-- Accessibility labels that must live in resources because they are also
+         used by non-Compose code paths (widget host, widget configuration). -->
+    <string name="a11y_app_icon">App icon</string>
+    <string name="a11y_widget">Home screen widget</string>
+    <string name="a11y_alphabet_rail">Alphabet navigation</string>
+</resources>

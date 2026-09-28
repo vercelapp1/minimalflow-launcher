@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Locales the launcher ships translations for. Only English is provided today;
+    the file exists so that Android's per-app language picker has something
+    meaningful to show and so adding a locale later needs no manifest change.
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="en" />
+</locale-config>

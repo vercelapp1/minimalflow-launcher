@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Only the handful of colours the platform needs before Compose takes over
+        are declared here. Every colour the user interface actually paints is
+        defined in Kotlin (see core/ui/ColorTokens.kt) so that themes stay in one
+        place.
+    -->
+
+    <!-- Default window background, matched to the "Obsidian" built-in theme. -->
+    <color name="minimalflow_window_background">#FF08090B</color>
+
+    <!-- Adaptive launcher icon background. -->
+    <color name="ic_launcher_background">#FF08090B</color>
+
+    <!-- Fallback colours referenced by the legacy (non-Compose) widget surface. -->
+    <color name="minimalflow_surface">#FF15171B</color>
+    <color name="minimalflow_on_surface">#FFF5F5F5</color>
+</resources>

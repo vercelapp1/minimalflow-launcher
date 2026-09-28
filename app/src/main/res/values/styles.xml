@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        The base theme exists only to give the window a sane look during the
+        handful of milliseconds before Jetpack Compose draws its first frame.
+        All real theming happens in MinimalFlowTheme (core/ui/MinimalFlowTheme.kt).
+    -->
+    <style name="Theme.MinimalFlow" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/minimalflow_window_background</item>
+        <item name="android:colorBackground">@color/minimalflow_window_background</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">false</item>
+    </style>
+
+    <!--
+        Used by the widget configuration activity, which shows a plain
+        Material surface instead of the themed launcher background.
+    -->
+    <style name="Theme.MinimalFlow.WidgetConfigure" parent="@android:style/Theme.Material.Dialog.NoActionBar">
+        <item name="android:windowBackground">@color/minimalflow_surface</item>
+        <item name="android:colorBackground">@color/minimalflow_surface</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

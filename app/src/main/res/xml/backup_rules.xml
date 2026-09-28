@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Platform backup rules (API 23-30).
+
+    The launcher stores only user configuration, so all of it is small enough to
+    travel with the user: the settings database and the DataStore preferences
+    file, which holds onboarding state, the previous home package and the last
+    weather reading.
+
+    Everything else is omitted by default and does not need excluding. The file
+    domain is included by name rather than wholesale so that a future icon or
+    widget cache written next to the DataStore file cannot quietly end up in
+    someone's cloud backup. App icons in particular are large and are fully
+    reconstructible from the package manager.
+-->
+<full-backup-content>
+    <include domain="database" path="minimalflow.db" />
+    <include domain="file" path="datastore/" />
+</full-backup-content>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+        MinimalFlow deliberately requests the smallest possible permission set.
+
+        EXPAND_STATUS_BAR : normal permission, used only by the optional
+            "open notification shade" gesture. The call is wrapped in a
+            try/catch because some OEM builds reject it.
+        INTERNET / ACCESS_NETWORK_STATE : used only by the optional weather
+            module, which is disabled by default. The launcher is fully usable
+            with airplane mode on.
+        ACCESS_COARSE_LOCATION : requested at runtime and only after the user
+            explicitly enables "use my location" for weather. Manual city
+            selection needs no location permission at all.
+
+        No QUERY_ALL_PACKAGES is requested: the <queries> block below already
+        exposes every launchable activity, every icon pack and every widget
+        provider, which is the full inventory a home screen needs.
+    -->
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!--
+        Package visibility.
+        - MAIN/LAUNCHER makes every launchable activity queryable, so the app
+          list is complete without QUERY_ALL_PACKAGES.
+        - APPWIDGET_BIND is required by AppWidgetManager.getInstalledProviders().
+        - The three icon-pack intents make installed icon packs discoverable.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.appwidget.action.APPWIDGET_BIND" />
+        </intent>
+        <intent>
+            <action android:name="org.LauncherTools.IconPack" />
+        </intent>
+        <intent>
+            <action android:name="com.anddoes.launcher.THEMES" />
+        </intent>
+        <intent>
+            <action android:name="com.gau.go.launcherex.theme" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".MinimalFlowApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:localeConfig="@xml/locales_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MinimalFlow"
+        tools:targetApi="34">
+
+        <!--
+            The Android home activity.
+
+            * exported="true" is mandatory: the system launches the HOME
+              category from outside the app.
+            * singleTask keeps a single home instance alive so that pressing
+              Home never stacks activities.
+            * stateNotNeeded is left at its default so the system saves and
+              restores instance state across process death.
+        -->
+        <activity
+            android:name=".ui.launcher.LauncherActivity"
+            android:clearTaskOnLaunch="false"
+            android:configChanges="keyboard|keyboardHidden|navigation|uiMode|density|fontScale|smallestScreenSize|screenSize|screenLayout|locale|layoutDirection"
+            android:enableOnBackInvokedCallback="true"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:theme="@style/Theme.MinimalFlow"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            "Manager" entry point. It shows up in the app drawer so the user can
+            always get back to settings, and it owns its own task so closing it
+            never disturbs the home screen.
+        -->
+        <activity
+            android:name=".ui.settings.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|uiMode|density|fontScale|smallestScreenSize|screenSize|screenLayout|locale|layoutDirection"
+            android:enableOnBackInvokedCallback="true"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity="${applicationId}.settings"
+            android:theme="@style/Theme.MinimalFlow"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            Widget host receiver.
+
+            A widget host is not finished when it can render widgets: it also has to
+            learn when a provider pushes an update, when the user resizes one and
+            when the platform reclaims an id. Android delivers exactly those three
+            callbacks to android.appwidget.AppWidgetProvider, which is the base
+            class of this receiver.
+
+            It declares no android.appwidget.provider metadata on purpose, because
+            MinimalFlow does not ship a widget of its own - it only hosts other
+            apps' widgets.
+
+            BIND_APPWIDGET is a signature-level permission the platform grants to the
+            current default home app, so exported="false" plus the permission is
+            what keeps third-party apps from waking the launcher on demand.
+        -->
+        <receiver
+            android:name=".core.widgetkit.WidgetHostReceiver"
+            android:exported="false"
+            android:permission="android.permission.BIND_APPWIDGET">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
