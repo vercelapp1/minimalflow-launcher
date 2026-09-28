@@ -1,0 +1,34 @@
+# Gradle
+.gradle/
+build/
+*/build/
+!gradle/wrapper/gradle-wrapper.jar
+local.properties
+
+# Android
+*.apk
+*.aab
+*.ap_
+*.dex
+release/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Signing material. The debug keystore is machine noise; release keys must never
+# be committed at all.
+*.jks
+*.keystore
+keystore.properties
+google-services.json
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.hprof
+tmp/
